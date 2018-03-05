@@ -1,0 +1,11 @@
+{
+  "apps" : [{
+    "name"        : "triggmine-ico-api",
+    "script"      : "./index.js",
+    "watch"       : true,
+    "env": {
+      "NODE_ENV": "dev",
+      "PORT": "4249"
+    }
+  }]
+}

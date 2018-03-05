@@ -1,0 +1,140 @@
+const fs = require('fs');
+const path = require('path');
+
+const TrustaBitToken = artifacts.require('./TrustaBitToken');
+const TrustaBitTokenAddress = '';
+const TrustaBitCrowdsale = artifacts.require('./TrustaBitCrowdsale');
+const moment = require('moment');
+
+module.exports = function(deployer, network, accounts) {
+  const args = {};
+  switch (network) {
+    case 'local':
+      args.wallet = accounts[0];
+      console.log(args.wallet);
+      args.rate = 700000;
+      args.preSaleStartDate = Math.floor(moment().add(5, 'm') / 1000);
+      args.preSaleEndDate = Math.floor(moment().add(10, 'm') / 1000);
+      args.mainSaleStartDate = Math.floor(moment().add(11, 'm') / 1000);
+      args.mainSaleEndDate = Math.floor(moment().add(15, 'm') / 1000);
+      args.advisorBountyTeamAddress = accounts[1];
+      break;
+    case 'rinkeby':
+      const {rinkebyWallet} = require('../wallets');
+      args.wallet = rinkebyWallet.getAddressString();
+      args.rate = 100000000;
+      args.preSaleStartDate = Math.floor(moment().add(5, 'm') / 1000);
+      args.preSaleEndDate = Math.floor(moment().add(10, 'm') / 1000);
+      args.mainSaleStartDate = Math.floor(moment().add(11, 'm') / 1000);
+      args.mainSaleEndDate = Math.floor(moment().add(15, 'm') / 1000);
+      args.advisorBountyTeamAddress = '0xDe20c9A0fEAD6faB180C0f8feB76713812b57b42';
+      break;
+    default:
+      args.wallet = '0xde20c9a0fead6fab180c0f8feb76713812b57b42';
+      args.rate = 89780;
+      args.preSaleStartDate = Math.floor(new Date('2018-02-05T11:00:00.000+0000') / 1000);
+      args.preSaleEndDate = Math.floor(new Date('2018-02-12T11:00:00.000+0000') / 1000);
+      args.mainSaleStartDate = Math.floor(new Date('2018-02-14T11:00:00.000+0000') / 1000);
+      args.mainSaleEndDate = Math.floor(new Date('2018-03-15T11:00:00.000+0000') / 1000);
+      args.advisorBountyTeamAddress = '0xde20c9a0fead6fab180c0f8feb76713812b57b42';
+  }
+
+  deployContract(deployer, args);
+};
+
+const deployContract = (deployer, {
+  wallet,
+  rate,
+  preSaleStartDate,
+  preSaleEndDate,
+  mainSaleStartDate,
+  mainSaleEndDate,
+  advisorBountyTeamAddress,
+}) => {
+    deployer.deploy(
+        TrustaBitCrowdsale,
+        // args
+        wallet,
+        TrustaBitTokenAddress,
+        rate,
+        preSaleStartDate,
+        preSaleEndDate,
+        mainSaleStartDate,
+        mainSaleEndDate,
+        advisorBountyTeamAddress,
+    )
+    .then(() => {
+    console.log('\n');
+    console.log(`export const tokenContractAddress = '${TrustaBitTokenAddress}';`);
+    console.log(`export const icoAddress = '${TrustaBitCrowdsale.address}';`);
+    console.log('\n');
+  }).then(() => TrustaBitToken.at(TrustaBitTokenAddress)).then(
+      (deployed) => deployed.transferOwnership(TrustaBitCrowdsale.address)).then((res) => console.log(
+      'change TrustaBitToken transferOwnership to',
+      TrustaBitCrowdsale.address,
+      '\n transaction', res.tx,
+      '\n status', Boolean(res.receipt.status),
+  ))
+  .then(() => TrustaBitCrowdsale.deployed())
+  .then(
+      (deployed) => deployed.transferOwnership(wallet))
+  .then((res) => console.log(
+      'change TrustaBitCrowdsale transferOwnership to',
+      wallet,
+      '\n transaction', res.tx,
+      '\n status', Boolean(res.receipt.status)
+  ))
+  .then(() => {
+    save(deployer.network, TrustaBitCrowdsale.toJSON(), TrustaBitCrowdsale.address, TrustaBitToken.address);
+  });
+};
+
+const buildPath = path.join(__dirname, '..', '..', 'app', 'app', 'blockchain', 'config');
+
+const save = (network, dataCrowdsale, addressCrowdsale, addressToken) => {
+  console.log('\n\n** SAVE APP DATA **\n');
+  const savePath = path.join(buildPath, network);
+
+  const {contractName, abi} = dataCrowdsale;
+
+  if (!fs.existsSync(savePath)) {
+    fs.mkdirSync(savePath);
+  }
+
+  fs.writeFileSync(path.join(savePath, 'ICO.json'), JSON.stringify({contractName, abi}), 'utf8');
+
+  const ethJs = `
+export const tokenContractAddress = '${addressToken}';
+export const icoAddress = '${addressCrowdsale}';
+
+export const provider = '${ethProvider(network)}';
+export const providerScan = '${ethProviderScan(network)}';
+  `;
+
+  fs.writeFileSync(path.join(savePath, 'eth.js'), ethJs.trim(), 'utf8');
+
+  console.log(dataCrowdsale.compiler);
+};
+
+const ethProvider = (network) => {
+  switch (network) {
+    case 'prod':
+      return 'https://mainnet.infura.io';
+    case 'rinkeby':
+      return 'https://rinkeby.infura.io';
+  }
+  return 'http://localhost:8545';
+};
+
+const ethProviderScan = (network) => {
+  switch (network) {
+    case 'prod':
+      return 'https://etherscan.io/tx';
+    case 'rinkeby':
+      return 'https://rinkeby.etherscan.io/tx';
+  }
+  return 'http://localhost:8545';
+};
+// module.exports = function(deployer, network, accounts) {
+//
+// };

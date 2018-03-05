@@ -1,0 +1,104 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Triggmine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+
+    <meta name="theme-color" content="#ffffff">
+     <!--build:css -->
+    <link rel="stylesheet" href="css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <!--<link rel="stylesheet" href=" css/animations.css" type="text/css">-->
+    <link rel="stylesheet" href="css/style.css">
+     <!--endbuild -->
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+        your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <nav class="main-nav">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="flexed-nav">
+                    <div>
+                        <a href="http://www.triggmine.com/" class="logo-a"><img src="img/logoBlackText.a23f8c2e.svg" class="logo"></a>
+                    </div>
+                    <div class="account-link">
+                        Don't have account? <a href="register.html" class="colored-green">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid contacts login" id="login">
+        <div class="container">
+            <div class="form-cover">
+                <form class="form" id="form-login" novalidate="novalidate">
+                    <h1 class="section-title">Sign in</h1>
+                    <div class="group" id="form-login-group-email">
+                        <input name="email" type="text" required="required" placeholder="Your email address" />
+                        <div class="error">Required</div>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="group" id="form-login-group-password">
+                        <input name="password" type="password" required="required" placeholder="Your password"></textarea>
+                        <div class="error">Required</div>
+                        <span class="bar"></span>
+                    </div>
+
+                    <div id="btn-sign" class="btn-div">
+                        <button type="button" class="btn btn-primary">Sign In</button>
+                    </div>
+                    <div id="btn-loader" class="btn-div" style="display: none;">
+                        <div class="loader" style="width:65px; height:65px;"></div>
+                    </div>
+                    <div class="redirect-link">
+                        <a href="reset.html">Forgot Password?</a>
+                     </div>
+                </form>
+                <div id="form-send-login" class="text-center" style="display: none;">
+                    <div class="form-send-message">
+                        <h4>You are successfully Sign In!</h4>
+                        <a href="/dashboard/" class="btn-primary btn">Go to the Dashboard</a>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- build:js -->
+    <!--<noscript>-->
+    <!--</noscript>-->
+    <script src="js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="js/vendor/jquery.cookie.js"></script>
+    <script src="js/main.js?2"></script>
+    <!--<script src="js/plugins.js"></script>-->
+    <!--<script src='js/css3-animate-it.js'></script>-->
+    <!--&lt;!&ndash; endbuild &ndash;&gt;-->    
+    <script type="text/javascript">var _kmq = _kmq || [];
+        var _kmk = _kmk || '28559a9fc57625e85531d8f2a3f1b6bbc37a1dab';
+        function _kms(u){
+          setTimeout(function(){
+            var d = document, f = d.getElementsByTagName('script')[0],
+            s = d.createElement('script');
+            s.type = 'text/javascript'; s.async = true; s.src = u;
+            f.parentNode.insertBefore(s, f);
+          }, 1);
+        }
+        _kms('//i.kissmetrics.com/i.js');
+        _kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');
+    </script>
+
+</body>
+
+</html>

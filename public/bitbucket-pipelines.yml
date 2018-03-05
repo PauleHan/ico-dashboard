@@ -1,0 +1,66 @@
+image: node:8.9
+pipelines:
+  custom:
+    build-stage:
+      - step:
+          script:
+            - cd api
+            - npm i --only=prod
+            - npm run build
+            - cd ../app
+            - npm i
+            - npm run build
+            - rm -rf node_modules
+            - cd ../admin
+            - npm i
+            - npm run build-stage
+            - rm -rf node_modules
+            - cd ..
+            - tar czf deploy.dev.tar.gz ./*
+            - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"deploy.dev.tar.gz"
+            - export CRUMB=$(curl --user $JKS_AUTH_STRING http://ci.nordwhale.com/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+            - curl -X POST -H $CRUMB "${JKS_URL}/job/triggmine-ico/build" --user $JKS_AUTH_STRING --data-urlencode json="{\"parameter\":[{\"name\":\"DEPLOY_FILE\",\"value\":\"deploy.dev.tar.gz\"}]}"
+          artifacts:
+            - deploy.dev.tar.gz
+    build-prod:
+      - step:
+          script:
+            - cd api
+            - npm i --only=prod
+            - npm run build
+            - cd ../app
+            - npm i
+            - npm run build:prod
+            - rm -rf node_modules
+            - cd ../admin
+            - npm i
+            - npm run build-prod
+            - rm -rf node_modules
+            - cd ..
+            - tar czf deploy.prod.tar.gz ./*
+            - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"deploy.prod.tar.gz"
+          artifacts:
+            - deploy.prod.tar.gz
+  tags:
+    build-*:
+      - step:
+          script:
+            - cd api
+            - npm i --production
+            - npm run build
+            - cd ../app
+            - npm i
+            - npm run build
+            - cd ../admin
+            - npm i
+            - npm run build-stage
+            - rm -rf node_modules
+            - cd ..
+            - tar czf deploy.dev.tar.gz ./*
+            - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"deploy.dev.tar.gz"
+            - mv deploy.dev.tar.gz $BITBUCKET_TAG.tar.gz
+            - curl -X POST "https://${BB_AUTH_STRING}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" --form files=@"$BITBUCKET_TAG.tar.gz"
+            - export CRUMB=$(curl --user $JKS_AUTH_STRING http://ci.nordwhale.com/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+            - curl -X POST -H $CRUMB "${JKS_URL}/job/triggmine-ico/build" --user $JKS_AUTH_STRING --data-urlencode json="{\"parameter\":[{\"name\":\"DEPLOY_FILE\",\"value\":\"deploy.dev.tar.gz\"}]}"
+          artifacts:
+            - deploy.dev.tar.gz

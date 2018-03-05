@@ -1,0 +1,671 @@
+
+$font-grey: #8e9194;
+$border-grey: #ebecef;
+$error: #e45555;
+$brand-one: #16c580;
+$brand-second:#0db371;
+@font-face {
+  font-family: "GraphikCy";
+  src: url("../fonts/graphik-bold-cy-web-origin.woff2") format("woff2"),
+        url("../fonts/graphik-bold-cy-web-origin.woff") format("woff");
+  font-weight: bold; }
+@font-face {
+  font-family: 'GraphikCy';
+  src: url("../fonts/graphik-regular-cy-web-origin.woff2") format("woff2"),
+        url("../fonts/graphik-regular-cy-web-origin.woff") format("woff");
+  font-weight: normal; }
+@font-face {
+  font-family: 'GraphikCy';
+  src: url("../fonts/graphik-medium-cy-web.woff2") format("woff2");
+  font-weight: 500;
+}
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flex-flow-row {
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+
+@mixin flex-flow-row-nowrap {
+    -webkit-flex-flow: row;
+    flex-flow: row;
+}
+
+@mixin flex-flow-column {
+    -webkit-flex-flow: column wrap;
+    flex-flow: column wrap;
+}
+
+// Basic start //
+* {
+    margin: 0;
+    text-decoration: none;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+html {
+    color: $font-grey;
+    font-family: 'GraphikCy', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+body {
+    background-color: #ffffff;
+    min-height: 1vh;
+    color: $font-grey;
+    font-family: 'GraphikCy', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+    font-size: 5em;
+}
+
+h3 {
+    font-size: 3em;
+}
+
+h4 {
+    font-size: 1.65em;
+}
+
+h5 {
+    font-size: 1.4em;
+}
+
+.section-title {
+    color: #000000;
+    font-size: 34px;
+    text-align: center;
+    letter-spacing: -1.1px;
+    font-family: 'GraphikCy', sans-serif;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.section {
+    padding: 3em 0 8em;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 100%;
+}
+
+.container:before,
+.container:after {
+    content: " ";
+    display: table;
+}
+
+.container:after {
+    clear: both;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 760px;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 980px;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1180px;
+    }
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.container-fluid:before,
+.container-fluid:after {
+    content: " ";
+    display: table;
+}
+
+.container-fluid:after {
+    clear: both;
+}
+
+img {
+    max-width: 100%;
+}
+
+nav {
+    list-style: none;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+
+//Buttons
+
+
+.btn {
+  //width: 200px;
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  height: 44px;
+  font-weight: bold;
+  font-size: 14px;
+  @include border-radius(4px);
+  transition: 0.5s;
+  a {
+    text-decoration: none;
+  }
+  &:hover {
+    //color: white;
+  }
+}
+
+.btn-primary {
+  background-color: $brand-one;
+  color: #ffffff;
+  transition: 0.5s;
+  &:hover {
+    background-color: $brand-second;
+  }
+}
+
+.fixed-nav {
+    width: 100%;
+}
+
+.flexed-nav {
+    @include flex;
+    @include flex-flow-row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em 0;
+}
+
+//login page
+
+.main-nav{
+  border-bottom: 1px solid $border-grey;
+  .flexed-nav{
+    padding: 1em 0;
+  }
+  .logo-a {
+    img {
+      width: 136px;
+    }
+  }
+}
+
+.account-link{
+  color: $font-grey;
+  font-size: 14px;
+  font-weight: normal;
+  float: right;
+  text-align: center;
+  //margin:0;
+  a {
+    color: $brand-one;
+    text-decoration: none;
+  }
+}
+
+.colored-green{
+  color: $brand-one;
+}
+
+.bolder{
+  font-weight: bolder;
+}
+
+.contacts {
+  padding: 100px 0 0;
+  .form-cover {
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+    p{
+      margin: 2em 0;
+      font-size: 1.125em;
+    }
+    .redirect-link {
+      width: 100%;
+      margin: 0 auto;
+      font-size: 14px;
+      p {
+        font-size:1.125em;
+        margin:0;
+      }
+      a {
+        text-decoration: underline;
+        display: inline-block;
+        color: $font-grey;
+      }
+    }
+    .form{
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      .group {
+        width: 100%;
+      }
+      .group-recaptcha {
+          position:relative;
+          flex:1;
+          
+          .g-recaptcha, .error {
+              width:304px;
+              margin: 0 auto;
+              position:relative;
+          }
+          .error {
+              height:0;
+              text-align:center!important;
+              position:relative!important;
+          }
+          
+      }
+
+      .group{
+        .error {
+          color: $error;
+          text-align: left;
+          margin-top: -25px;
+          position: absolute;
+          font-size: 12px;
+          display: none;
+          max-width: 350px;
+          line-height: 1;
+          a {
+            font-weight: bold;
+            text-decoration:underline;
+          }
+        }
+        &.has-error {
+          .error {
+            display: block;
+          }
+        }
+      }
+      input, textarea {
+        display: block;
+        padding: 0 12px;
+        width: 100%;
+        height: 50px;
+        border: 2px solid $border-grey;
+        @include border-radius(4px);
+        font-size: 14px;
+        color: #000000;
+        font-weight: 500;
+        line-height: 1.25;
+        letter-spacing: -0.3px;
+        margin-bottom: 2em;
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: #C8C8C8;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: #C8C8C8;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: #C8C8C8;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: #C8C8C8;
+        }
+        &:focus {
+          outline: none;
+          &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: $border-grey;
+          }
+          &::-moz-placeholder { /* Firefox 19+ */
+          color: $border-grey;
+          }
+          &:-ms-input-placeholder { /* IE 10+ */
+          color: $border-grey;
+          }
+          &:-moz-placeholder { /* Firefox 18- */
+          color: $border-grey;
+          }
+        }
+      }
+      .check-group {
+        margin-left:2em;
+        .check-container {
+          display: block;
+          position: relative;
+          padding-left: 2em;
+          padding-right: 1em;
+          margin-bottom: 1.5em;
+          cursor: pointer;
+          font-size: 14px;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          text-align: left;
+        }
+
+        .check-container input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          width: 0;
+          height: 0;
+        }
+
+        .checkmark {
+          position: absolute;
+          top: 4px;
+          left: 0;
+          height: 16px;
+          width: 16px;
+          @include border-radius(2px);
+          border: 2px solid #BDBDBD;
+
+        }
+
+        .check-container:hover input ~ .checkmark {
+          border: 2px solid $brand-one;
+        }
+
+        .check-container input:checked ~ .checkmark {
+          background-color: $brand-one;
+          border: 2px solid $brand-one;
+        }
+
+        .checkmark:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+
+        .check-container input:checked ~ .checkmark:after {
+          display: block;
+        }
+
+        .check-container .checkmark:after {
+          left: 4px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+      }
+      .btn-div {
+        width: 100%;
+        margin: 2.5em auto 0;
+      }
+      button{
+        margin-bottom: 1.5em;
+      }
+    }
+  }
+}
+.form-send-message {
+  display: block;
+  text-align: center;
+  font-size: 1.125em;
+  p{
+    padding:0.5em;
+  }
+  a{
+    width:350px;
+    max-width: 100%;
+    padding: 12px 0;
+    margin: 1.5em auto;
+  }
+  h4{
+    margin: 2em 0;
+    color: #000000;
+  }
+}
+.contacts .form-cover .form-contact .group .error {
+  margin-top: 0 !important;
+}
+.login .form-cover .form-contact .group .error {
+  margin-top: 35px !important;
+}
+
+.w-chrome,
+div#wistia_grid_22_wrapper,
+div#wistia_grid_22_above,
+#wistia_grid_21_main,
+#wistia_grid_21_wrapper,
+#wistia_grid_22_main {
+    height: auto !important;
+}
+
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 991px) {
+    .topnav a.icon {
+        display: block;
+    }
+    .flexed-nav {
+      padding: 0.5em 1em;
+      @include flex-flow-column;
+      .account-link{
+        margin-top: 1.2em;
+      }
+    }
+}
+
+
+.group .error-p {
+    display: none;
+    position: absolute;
+}
+
+.has-error .error-p {
+    display: block;
+    color: $brand-one;
+}
+
+
+
+@media (max-width: 667px){
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+
+@media only screen
+and (min-device-width : 375px) // or 213.4375em or 3in or 9cm
+and (max-device-width : 667px) // or 41.6875em
+and (width : 667px) // or 41.6875em
+and (height : 375px) // or 23.4375em
+and (orientation : landscape)
+and (color : 8)
+and (device-aspect-ratio : 375/667)
+and (aspect-ratio : 667/375)
+and (device-pixel-ratio : 2)
+and (-webkit-min-device-pixel-ratio : 2)
+{
+
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+
+@media only screen
+and (max-device-width: 640px),
+only screen and (max-device-width: 667px),
+only screen and (max-width: 480px)
+{
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+
+/*iPhone 6 landscape*/
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : landscape)
+{
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+
+
+/*iPhone 6+ landscape*/
+@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : landscape) {
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+/*iPhone 6 and iPhone 6+ portrait and landscape*/
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px)
+{
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+
+
+/*iPhone 6 and iPhone 6+ landscape*/
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px) and (orientation : landscape)
+{
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+@media only screen
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+{
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+
+}
+
+/* ----------- iPhone 6+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+
+/* Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+
+  .contacts .form-cover .form-contact {
+    @include flex-flow-column;
+  }
+}
+
+.loader {
+    border: 16px solid #f3f3f3; 
+    border-top: 16px solid #16c580; 
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

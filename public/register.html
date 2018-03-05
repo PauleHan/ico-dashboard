@@ -1,0 +1,158 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Triggmine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+
+    <meta name="theme-color" content="#ffffff">
+    <!--build:css -->
+    <link rel="stylesheet" href="css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <!--<link rel="stylesheet" href=" css/animations.css" type="text/css">-->
+    <link rel="stylesheet" href="css/style.css">
+    <!--endbuild -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+    <nav class="main-nav">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="flexed-nav">
+                    <div>
+                        <a href="http://www.triggmine.com/" class="logo-a"><img src="img/logoBlackText.a23f8c2e.svg" class="logo"></a>
+                    </div>
+                    <div class="account-link">
+                        Have account? <a href="login.html" class="colored-green">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid contacts login" id="register">
+        <div class="container">
+            <div class="form-cover">
+                <form class="form" id="form-register" novalidate="novalidate">
+                    <h1 class="section-title">Sign up</h1>
+                    <div class="group" id="form-register-group-full_name">
+                        <input name="full_name" type="text" required="required" placeholder="Your full name" />
+                        <div class="error">Name is required</div>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="group" id="form-register-group-email">
+                        <input name="email" type="text" required="required" placeholder="Your email" />
+                        <div class="error">Required</div>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="group" id="form-register-group-password">
+                        <input name="password" type="password" required="required" placeholder="Your password"></textarea>
+                        <div class="error">Required</div>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="group" id="form-register-group-password_repeat">
+                        <input name="password_repeat" type="password" required="required" placeholder="Repeat your password"></textarea>
+                        <div class="error">Password mismatch</div>
+                        <span class="bar"></span>
+                    </div>
+                    <div class="check-group">
+                        <label class="check-container">You have read and understand our Terms of Service
+                            <input type="checkbox" name="service_terms" id="service-terms">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="check-group group" id="form-register-group-checkboxes">
+                        <label class="check-container">You have read and understand our Token Sale Conditions
+                            <input type="checkbox" name="token_sale_conditions" id="token-sale-conditions">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="error">Password mismatch</div>
+                    </div>
+                    <div class="group group-recaptcha" id="form-register-group-recaptcha">
+                        <div class="g-recaptcha" data-callback="recaptchaCallback" data-sitekey="6LdcnEIUAAAAAAk40WpanMq46Hlyx-g1dygfhYPs"></div>
+                        <div class="error" style="margin-top:0!important;">Password mismatch</div>
+                    </div>
+                    <div id="btn-register" class="btn-div">
+                        <button type="button" class="btn btn-primary">Register</button>
+                    </div>
+                    <div id="btn-loader" class="btn-div" style="display: none;">
+                        <div class="loader" style="width:65px; height:65px;"></div>
+                    </div>
+                </form>
+            </div>
+            <div id="form-send-register" class="text-center" style="display: none;">
+                <div class="form-send-message">
+                    <h3 class="section-title">Finish your registration</h3>
+                    <p>We have sent you an email confirmation.</p>
+                    <p class="colored-green bolder">Please check your email to finish registration.</p>
+                </div>
+            </div>
+            <div id="form-send-finish" class="text-center" style="display: none;">
+                <div class="form-send-message">
+                    <h3 class="section-title">Registration successful</h3>
+                    <p>You have successfully registered. Now you can grow your business faster with the Triggmine!</p>
+                    <a href="/dashboard/" class="btn-primary btn">Go to the Dashboard</a>
+                </div>
+            </div>
+            <div id="form-send-error" class="text-center" style="display: none;">
+                <div class="form-send-message">
+                    <h3 class="section-title">Error</h3>
+                    <p>Something went wrong.</p>
+                </div>
+            </div>
+            <div id="form-send-resend" class="text-center" style="display: none;">
+                <div class="form-send-message">
+                    <h3 class="section-title">Confirmation resend</h3>
+                    <p>We have sent you an email confirmation.</p>
+                    <p class="colored-green bolder">Please check your email to finish registration.</p>
+                </div>
+            </div>
+            <div id="form-loading" class="text-center" style="display: none;">
+                <div class="form-send-message">
+                     <div class="loader"></div> 
+                </div>
+            </div>
+            <p></p>
+
+        </div>
+    </div>
+
+    <!-- build:js -->
+    <!--<noscript>-->
+<!--</noscript>-->
+    <script src="js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="js/vendor/jquery.cookie.js"></script>
+    <!--<script src="js/plugins.js"></script>-->
+    <!--<script src='js/css3-animate-it.js'></script>-->
+    <script src="js/main.js?2"></script>
+    <!--&lt;!&ndash; endbuild &ndash;&gt;-->
+    <script type="text/javascript">var _kmq = _kmq || [];
+        var _kmk = _kmk || '28559a9fc57625e85531d8f2a3f1b6bbc37a1dab';
+        function _kms(u){
+          setTimeout(function(){
+            var d = document, f = d.getElementsByTagName('script')[0],
+            s = d.createElement('script');
+            s.type = 'text/javascript'; s.async = true; s.src = u;
+            f.parentNode.insertBefore(s, f);
+          }, 1);
+        }
+        _kms('//i.kissmetrics.com/i.js');
+        _kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');
+    </script>
+
+
+
+</body>
+
+</html>

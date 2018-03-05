@@ -1,0 +1,6 @@
+npm-debug.log
+.imdone
+coverage
+node_modules
+build
+.env

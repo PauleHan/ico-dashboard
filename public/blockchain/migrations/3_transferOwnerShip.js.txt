@@ -1,0 +1,20 @@
+
+const TrustaBitToken = artifacts.require('./TrustaBitToken');
+const TrustaBitCrowdsale = artifacts.require('./TrustaBitCrowdsale');
+
+const tokenContractAddress = '0x4ddaf983302f451a5a6dc95af102335bf280d9a7';
+const icoAddress = '0x39Db2AB26F405916f0020ca12bAA95e56fADF599';
+const wallet = '0xde20c9a0fead6fab180c0f8feb76713812b57b42';
+
+module.exports = function(deployer, network, accounts) {
+
+  TrustaBitCrowdsale.at(icoAddress)
+    .then(
+      (deployed) => deployed.transferOwnership(wallet))
+    .then((res) => console.log(
+      'change TrustaBitCrowdsale transferOwnership to',
+      wallet,
+      '\n transaction', res.tx,
+      '\n status', Boolean(res.receipt.status)
+    ));
+};
